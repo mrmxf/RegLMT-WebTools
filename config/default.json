@@ -1,6 +1,6 @@
 {
-    "app_title": "Register: Language Metadata Table SMPTE ST xxxx",
-    "app_description": "LMT viewer",
+    "app_title": "Register: Language Metadata Table",
+    "app_description": "<emphasis><strong>PREVIEW</strong> LMT pending development as SMPTE ST xxxx</emphasis>",
     "version": "0.8",
     "port": 3000,
     "static": {
