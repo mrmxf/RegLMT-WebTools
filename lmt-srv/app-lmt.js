@@ -1,14 +1,14 @@
-/** 
+/**
  *  @module  app-lmt
  *  @author  Mr MXF
  *  @version 0.4
- * 
+ *
  * A very simple Koa Server to do the following:
  *  - Render the LMT into a number of different views
  *  - Create a simple index page (view-0)
  *  - Validate am XML document against the LMT schema
  *  - create a diff between two versions of LMT
- * 
+ *
  * Implements
  *  - <root>/          index page to show lmt-narrative.md + color coded xml
  *  - <root>/current   return raw xml of the current version
@@ -17,7 +17,7 @@
  *  - <root>/validate  run the LMT validation tool
  *  - <root>/view-00   display view-00
  *  - <root>/view-NN   display view NN where NN is a number
- * 
+ *
  * Requires
  *  - Node v12.x or higher
  *  - Linux host (so that LibXML compiles properly)
@@ -76,6 +76,7 @@ app.use(mount(prefix, require('./route-index').routes()))
 
 //>>> serve the views from the buttons
 app.use(mount(prefix, require('./route-xml').routes()))
+app.use(mount(prefix, require('./route-xsd').routes()))
 
 app.use(mount(prefix, require('./route-view-control-doc').routes()))
 app.use(mount(prefix, require('./route-view-xml').routes()))
