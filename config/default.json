@@ -31,6 +31,7 @@
     },
     "url_prefix": "",
     "cache": "dist/cache",
+    "upload_folder":"/tmp",
     "logging": {
         "_help": "logging goes to stderr by default - see https://github.com/pinojs/pino/blob/HEAD/docs/transports.md",
         "level": "info",

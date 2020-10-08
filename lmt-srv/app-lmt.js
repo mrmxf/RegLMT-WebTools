@@ -36,7 +36,7 @@ const log = pino(config.get('logging'), pino.destination(2))
 
 //required libraries for koa server, router and url mount
 const Koa = require('koa')
-const Router = require('koa-router')
+const bodyParser = require('koa-body')
 const mount = require('koa-mount')
 const request_logger = require('koa-pino-logger')
 
@@ -62,7 +62,14 @@ const prefix = `${(raw_prefix[0] == "/") ? "" : "/"}${raw_prefix}`
 
 //enable logging
 if (config.get('logging.log_requests'))
-    app.use(request_logger())
+  app.use(request_logger())
+
+//enable file uploads for the XML conversion tool using koa-body
+app.use(bodyParser({
+  formidable: { uploadDir: config.get("upload_folder")},    //This is where the files would come
+  multipart: true,
+  urlencoded: true
+}));
 
 //>>> serve static pages as defined in config
 const serve = require('koa-static')
@@ -87,5 +94,7 @@ app.use(mount(prefix, require('./route-table-group').routes()))
 
 app.use(mount(prefix, require('./route-tool-diff').routes()))
 app.use(mount(prefix, require('./route-tool-validate').routes()))
+
+app.use(mount(prefix, require('./route-tool-convert').routes()))
 
 module.exports = app
